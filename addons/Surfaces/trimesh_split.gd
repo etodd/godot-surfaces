@@ -18,7 +18,11 @@ func _process_node(node: Node) -> void:
 	var parent := shape.get_parent()
 	if parent is not StaticBody3D:
 		return
+	
 	var body: StaticBody3D = parent as StaticBody3D
+	if body.name != "StaticBody3D":
+		# if the name is something else (set by the user), it must be a -colonly node. Leave it alone.
+		return
 	
 	var grandparent := body.get_parent()
 	if grandparent is not ImporterMeshInstance3D:
